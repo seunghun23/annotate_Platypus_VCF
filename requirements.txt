@@ -1,0 +1,4 @@
+pandas==1.4.2
+numpy==1.21.5
+requests==2.27
+tqdm==4.64.0
