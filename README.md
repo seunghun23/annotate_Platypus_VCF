@@ -26,12 +26,12 @@ Click the green Clone or Download button above, copy the presented web URL, and 
 Parameters
 -------------
 
-* `input_VCF` : Name of the input vcf file. The input file needs to be inside the sample folder as the annotate.py file
-*  `Genome_build` : Genome build used when calling the variants. User can choose between `GRCh38` or `GRCh37` Default is GRCh37
-*  `output_dir` : Output directory to write the annotated tsv file. Default is the current folder
-*  `number_thread` : Number of thread to use for multi-threading. Default is 4 cores
-*  `output_filename` : Filename for the annotated tsv file. 
-*  `print_raw_cols` : Outputs a table with all raw vcf columns on top of the default shortened annotated output if "yes". Default is "no" 
+* `input_VCF` : Name of the input vcf file. The input file should be located in the sample folder as the annotate.py file
+*  `Genome_build` : Genome build of the reference used for variant calling. Users can choose between `GRCh38` or `GRCh37` The default is GRCh37
+*  `output_dir` : Output directory for the annotated TSV file. The default is the current folder
+*  `number_thread` : Number of threads to use for multi-threading. The default is 4 cores
+*  `output_filename` : Filename for the annotated TSV file. 
+*  `print_raw_cols` : If set to "yes", the output will include a table with all raw VCF columns in addition to the default shortened annotated output. The default is "no".
 
 
 Usage
@@ -40,6 +40,10 @@ Usage
 
 Output
 --------------
+<b>The default annotated output includes only the variants that passed the filtering based on the information in the FILTER column of the
+  raw vcf.</b>
+  To obtain the full list of variants along with the original columns from the input VCF, use the option `--print_raw_cols yes`
+
 Example default annotated variant output row:
 
 
@@ -54,10 +58,10 @@ Example default annotated variant output row:
  * `VARIANT_CLASS` : Type of the variant. (SNV, indel, substitution)
  * `Consequence` : Effect of the variant. (missense_variant, frameshift_variant, start_lost...etc).    
        Refer to https://useast.ensembl.org/info/genome/variation/prediction/predicted_data.html
- * `MAF` : Minor Allele Frequency of a variant. This value is given only when the alt allele of the variant is actually a minor allele for the position
- * `VAF` : Variant Allele Frequency. This is number of reads supporting the variant divided by the total number of sequencing reads at the position
- * `RAF` : Reference Allele Frequency. Number of reads supporting the ref allele divided by the total number of sequencing reads (Also `100 - VAF`)
- * `Read_Depth` : Total number of reads at the site of variant (Depth of sequence coverage).
+ * `MAF` : Minor Allele Frequency of a variant. This value is provided only when the alt allele of the variant is the minor allele for the position.
+ * `VAF` : Variant Allele Frequency, calculated as the number of reads supporting the variant divided by the total number of sequencing reads at the position.
+ * `RAF` : Reference Allele Frequency, calculated as the number of reads supporting the ref allele divided by the total number of sequencing reads (also 100 - VAF).
+ * `Read_Depth` : Total number of reads at the site of the variant (Depth of sequence coverage).
  * `Supporting_Reads` : Total number of reads supporting the variant
- * `ALT_Type` : Indicate whether a variant is `Multi-Allelic` or `Biallelic`. Variants with Multi-Allelic flag are the ones originally had one row in the vcf with more than one possible ALT allele. They are decomposed into individual variant per alt allele. We recommend users to review the raw sequencing file (BAM or CRAMS) for the multi-allelic variants
- * `sample` : The same sample column value extacted from the original VCF. 
+ * `ALT_Type` : Indicates whether a variant is Multi-Allelic or Biallelic. Multi-Allelic variants are those with more than one possible ALT allele in the original VCF. They are decomposed into individual variants per alt allele. It is recommended that users review the raw sequencing files (BAM or CRAM) for multi-allelic variants.
+ * `sample` : The sample column value extacted from the original VCF. The format is `GT:GL:GOF:GQ:NR:NV`
