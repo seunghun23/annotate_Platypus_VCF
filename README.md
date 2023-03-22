@@ -9,7 +9,7 @@ annotate each variant with
 6) Variant Consequence 
 7) Minor Allele Frequency 
 
-For item number 4-7, the tool uses REST API for Variant Effector Predictor (https://rest.ensembl.org/#VEP)
+For items number 4-7, the tool uses REST API for Variant Effector Predictor (https://rest.ensembl.org/#VEP)
 
 
 
@@ -65,3 +65,8 @@ Example default annotated variant output row:
  * `Supporting_Reads` : Total number of reads supporting the variant
  * `ALT_Type` : Indicates whether a variant is Multi-Allelic or Biallelic. Multi-Allelic variants are those with more than one possible ALT allele in the original VCF. They are decomposed into individual variants per alt allele. It is recommended that users review the raw sequencing files (BAM or CRAM) for multi-allelic variants.
  * `sample` : The sample column value extacted from the original VCF. The format is `GT:GL:GOF:GQ:NR:NV`
+
+
+Note on VEP annotation
+------------------
+By default, VEP annotates every genomic feature (e.g. transcripts) with which a variant colocalizes. To obtain annotations for only the most relevant transcript per variant, the '--pick' option was utilized. For a comprehensive explanation of the selection criteria, please visit https://useast.ensembl.org/info/docs/tools/vep/script/vep_other.html#pick.
