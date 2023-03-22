@@ -36,7 +36,7 @@ Parameters
 
 Usage
 --------------
-`python annotate.py --input_VCF test_vcf_data.txt --output_dir results --number_thread 8 --output_filename test`
+`python annotate.py --input_VCF test_vcf_data.txt --output_dir results --number_thread 8 --output_filename test --print_raw_cols yes`
 
 Output
 --------------
@@ -63,7 +63,7 @@ Example default annotated variant output row:
  * `RAF` : Reference Allele Frequency, calculated as the number of reads supporting the ref allele divided by the total number of sequencing reads (also 100 - VAF).
  * `Read_Depth` : Total number of reads at the site of the variant (Depth of sequence coverage).
  * `Supporting_Reads` : Total number of reads supporting the variant
- * `ALT_Type` : Indicates whether a variant is Multi-Allelic or Biallelic. Multi-Allelic variants are those with more than one possible ALT allele in the original VCF. They are decomposed into individual variants per alt allele. It is recommended that users review the raw sequencing files (BAM or CRAM) for multi-allelic variants.
+ * `ALT_Type` : Indicates whether a variant is Multi-Allelic or Biallelic. Multi-Allelic variants are those with more than one possible ALT allele in the original VCF. They are decomposed into individual variants per alt allele. For example, if a variant has value of 1/2 for GT column in the vcf, this variant is divided into separate entities each with GT of 0/1. It is recommended that users review the raw sequencing files (BAM or CRAM) for multi-allelic variants.
  * `sample` : The sample column value extacted from the original VCF. The format is `GT:GL:GOF:GQ:NR:NV`
 
 
